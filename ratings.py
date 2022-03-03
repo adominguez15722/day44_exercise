@@ -9,7 +9,13 @@ def ratings():
         scores = rest_rate.readlines()
 
     rest_name = input("What is restaurant you have tried? ")
-    rest_rating = input("On a scale from 1-5, how would you rate that restaurant? ")
+    rest_rating = int(input("On a scale from 1-5, how would you rate that restaurant? "))
+
+    while rest_rating not in range(0,6):
+        rest_rating = int(input("Need a rating between 1-5!"))
+        if rest_rating in range(0, 6):
+            break
+    
 
     rate_dict[rest_name] = rest_rating
 
