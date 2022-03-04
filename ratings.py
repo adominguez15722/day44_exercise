@@ -2,6 +2,7 @@
 
 
 # put your code here
+from operator import le
 import sys
 import random
 
@@ -18,10 +19,10 @@ def ratings():
     answer = 1
     while answer != 3:
         
-        answer = int(input("What would you like to do? \n" "1. Rate a new restaurant \n"  "2. See all restaurants and ratings \n"  "3. Quit \n" "4. Update a random restaurant's rating \n"))
+        answer = int(input("What would you like to do? \n" "1. Rate a new restaurant \n"  "2. See all restaurants and ratings \n"  "3. Quit \n" "4. Update a random restaurant's rating \n" "5. Update a specific restaurant's rating \n"))
     
-        while answer not in range(0, 5):
-            answer = int(input("Need to pick an answer between 1-4! "))
+        while answer not in range(0, 6):
+            answer = int(input("Need to pick an answer between 1-5! "))
             if answer in range(0, 5):
                 break
         
@@ -72,7 +73,25 @@ def ratings():
             
             for items in rate_dict:
                 print(f"{items[0]}" + " is rated at " + f"{items[1]}")
+
+        elif answer == 5:
+            rate_dict_list = sorted(rate_dict.items())
+            counter = 1
             
-        
+            for items in rate_dict_list:
+                print(f"{counter}." f"{items[0]}" + " is rated at " + f"{items[1]}")
+                counter += 1
+
+            choice = int(input("Which restaurant do you want to change? "))
+
+            while choice not in range(0, len(rate_dict) + 1):
+                choice = int(input("Need a rating between 1-" + f"{len(rate_dict)}" + " "))
+                break
+            
+            if choice in range(0, len(rate_dict) + 1):
+                change = int(input("What do you want to change the rating to? "))
+                new_choice = choice - 1
+                rate_dict[new_choice] = change
+
 ratings()
 
